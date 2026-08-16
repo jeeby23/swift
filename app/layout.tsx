@@ -11,7 +11,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 
 export const metadata: Metadata = {
   title: "Next.js App",
-  description: "Using IBM Plex",
+  description: "swift meat empire",
 };
 
 export default function RootLayout({

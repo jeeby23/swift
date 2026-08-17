@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans,EB_Garamond  } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 // Configure the font
 const ibmPlexSans = IBM_Plex_Sans({
@@ -32,6 +33,7 @@ export default function RootLayout({
             <body className={`${ibmPlexSans.className} ${ebGaramond.variable}`}>
         <Header/>
         {children}
+      <Footer/>
       </body>
     </html>
   );

@@ -38,7 +38,6 @@ export default function Header() {
   return (
     <header className="w-full bg-[#E1364F]">
       <div className="flex items-stretch justify-between text-white">
-        {/* Logo + nav, constrained to the app's max-width container */}
         <div className="min-w-0 flex-1">
           <Container>
             <div className="flex items-center justify-between py-3 md:py-1">

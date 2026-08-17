@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -8,6 +7,7 @@ import { ChevronDownIcon, MenuIcon, XIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Container } from '@/shared/container'
+import { useMobileNav } from '@/hooks/use-mobile'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,13 +19,9 @@ import {
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet'
 import { Button } from './ui/button'
 
-const BRAND_RED = '#E1364F'
-const BRAND_RED_DARK = '#AC2A41'
-const MOBILE_MENU_BG = '#FBECE8'
-
 const navLinks = [
   { label: 'Company', href: '/' },
-  { label: 'About Us', href: '/about' },
+  { label: 'About Us', href: '/about-us' },
 ]
 
 const trailingLinks = [
@@ -37,16 +33,10 @@ const products = [{ label: 'Cattle Gallstone', href: '/products/cattle-gallstone
 
 export default function Header() {
   const pathname = usePathname()
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [productsOpen, setProductsOpen] = useState(false)
-
-  const closeMobile = () => {
-    setMobileOpen(false)
-    setProductsOpen(false)
-  }
+  const { mobileOpen, setMobileOpen, productsOpen, toggleProducts, closeMobile } = useMobileNav()
 
   return (
-    <header className="w-full" style={{ backgroundColor: BRAND_RED }}>
+    <header className="w-full bg-[#E1364F]">
       <div className="flex items-stretch justify-between text-white">
         {/* Logo + nav, constrained to the app's max-width container */}
         <div className="min-w-0 flex-1">
@@ -124,10 +114,7 @@ export default function Header() {
                   showCloseButton={false}
                   className="w-4/5 gap-0 p-0 sm:max-w-xs"
                 >
-                  <div
-                    className="flex items-center justify-between px-4 py-3"
-                    style={{ backgroundColor: BRAND_RED }}
-                  >
+                  <div className="flex items-center justify-between px-4 py-3 bg-[#E1364F]">
                     <Image
                       src="/BrandLogo.png"
                       alt="Brand Logo"
@@ -143,7 +130,7 @@ export default function Header() {
                     </SheetClose>
                   </div>
 
-                  <div className="flex flex-col" style={{ backgroundColor: MOBILE_MENU_BG }}>
+                  <div className="flex flex-col bg-[#FBECE8]" >
                     {navLinks.map((link) => {
                       const active = pathname === link.href
                       return (
@@ -153,9 +140,8 @@ export default function Header() {
                           onClick={closeMobile}
                           className={cn(
                             'border-b border-black/10 px-4 py-4 text-base font-normal tracking-wide uppercase',
-                            active ? '' : 'text-neutral-800',
+                            active ? 'text-[#E1364F]' : 'text-neutral-800',
                           )}
-                          style={active ? { color: BRAND_RED } : undefined}
                         >
                           {link.label}
                         </Link>
@@ -164,7 +150,7 @@ export default function Header() {
 
                     <button
                       type="button"
-                      onClick={() => setProductsOpen((open) => !open)}
+                      onClick={toggleProducts}
                       className="flex items-center justify-between border-b border-black/10 px-4 text-base font-normal leading-17.5 tracking-wide text-neutral-800 uppercase"
                     >
                       Products
@@ -208,9 +194,10 @@ export default function Header() {
         </div>
 
         {/* Place Order — flush to the right edge, full header height */}
+
         <Link
           href="/place-order"
-          className="hidden shrink-0 items-center px-2 text-base font-normal tracking-wide uppercase transition-colors lg:flex hover:brightness-110 rounded-full"
+          className="hidden shrink-0 items-center px-2 mr-10 text-base font-normal tracking-wide uppercase transition-colors lg:flex hover:brightness-110 rounded-full"
         >
           <Button className="bg-[#AC2A41] text-base font-normal leading-17.5 px-8 py-4 rounded-full cursor-pointer">
             Place Order

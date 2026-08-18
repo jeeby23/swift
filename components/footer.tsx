@@ -5,11 +5,9 @@ export default function Footer() {
   return (
     <footer className="bg-[#F1100E] text-white ">
       <Container>
-        {/* Main footer */}
         <section>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Image */}
           <div className="relative min-h-[300px] md:min-h-[420px] my-4">
             <Image
               src="/swift-footer.jpg"
@@ -18,8 +16,6 @@ export default function Footer() {
               className="object-cover"
             />
           </div>
-
-          {/* Contact information */}
           <div className="flex flex-col justify-center px-8 py-12 md:px-12 lg:px-16">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#E2241B]">
               Get in touch

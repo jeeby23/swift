@@ -192,7 +192,7 @@ export default function Header() {
           </Container>
         </div>
 
-        {/* Place Order — flush to the right edge, full header height */}
+        {/* Place Order  */}
 
         <Link
           href="/place-order"
